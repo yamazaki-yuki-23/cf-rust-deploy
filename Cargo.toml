@@ -2,7 +2,6 @@
 name = "cf-rust-deploy"
 version = "0.1.0"
 edition = "2021"
-authors = ["yamazaki-yuki-23 <natural4083@gmail.com>"]
 
 [lib]
 crate-type = ["cdylib"]
