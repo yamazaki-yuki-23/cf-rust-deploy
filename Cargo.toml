@@ -8,6 +8,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 axum = { version = "0.8", default-features = false }
+axum-extra = { version = "0.10", default-features = false, features = ["typed-header"] }
 tower-service = "0.3"
 worker = { version = "0.7", features = ["http", "axum"] }
 worker-macros = { version = "0.7" }
