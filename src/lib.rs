@@ -1,18 +1,20 @@
+use axum::{routing::get, Router};
+use tower_service::Service;
 use worker::*;
 
-fn root_handler(_req: Request, _ctx: RouteContext<()>) -> Result<Response> {
-    Response::ok("Hello, World!")
+async fn root() -> &'static str {
+    "Hello Axum!"
+}
+
+fn router() -> Router {
+    Router::new().route("/", get(root))
 }
 
 #[event(fetch)]
 async fn fetch(
-    _req: Request,
+    req: HttpRequest,
     _env: Env,
     _ctx: Context,
-) -> Result<Response> {
-    let router = Router::new();
-    router
-        .get("/", root_handler)
-        .run(_req, _env)
-        .await
+) -> Result<axum::http::Response<axum::body::Body>> {
+    Ok(router().call(req).await?)
 }
